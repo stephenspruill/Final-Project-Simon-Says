@@ -1,4 +1,31 @@
 https://bob.cs.sonoma.edu/IntroCompOrg-RPi/chp-gpio.html - Contains information and examples of accessing the GPIO using ARM assembly language
+
 https://www.draw.io/ - Platform to create final project flowchart
+
 https://bob.cs.sonoma.edu/IntroCompOrg-RPi/sec-gpio-pins.html - Contains information on the registers and pin values
-https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf - Starting on page 89, contains useful information for accessing the GPIO such as register address values
+
+https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf - Starting on page 89, contains useful information for accessing the GPIO such as register address values.
+The addresses listed in the manual must be written as listed below:
+"Thus a peripheral advertised here at bus address 0x7Ennnnnn is available at physical address 0x3Fnnnnnn."
+Here's an example of assembly code that enables a GPIO pin I pulled from raspberry pi's stackexchange.
+------------------------------------------------------------------------------------------------------------------------
+What I was trying is basically debug an assembly code so I needed to know when does the code stop compilation which will 
+be possible if I point it out with an external led using a gpio pin. I fixed my code and now its working correctly.
+.section ".text.boot"
+
+.global _start
+
+_start:
+    ldr X0,=0x3F200000 
+    mov W1,#1
+    lsl W1,W1,#12
+    str W1,[X0,#4]
+    mov W1,#1
+    lsl W1,W1,#14
+    str W1,[X0,#28]
+1:  wfe
+    b       1b
+    
+I simply set the 3 bits that control pin 14 to 001 which are bit 12,13 and 14 and then enabled pin 14 by putting 1 in it 
+and after that I just sent on which is 28 + the base address, (I looked up the manual for that). Hope that helps
+-------------------------------------------------------------------------------------------------------------------------
