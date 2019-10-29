@@ -1,3 +1,4 @@
 https://bob.cs.sonoma.edu/IntroCompOrg-RPi/chp-gpio.html - Contains information and examples of accessing the GPIO using ARM assembly language
 https://www.draw.io/ - Platform to create final project flowchart
 https://bob.cs.sonoma.edu/IntroCompOrg-RPi/sec-gpio-pins.html - Contains information on the registers and pin values
+https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf - Starting on page 89, contains useful information for accessing the GPIO such as register address values
