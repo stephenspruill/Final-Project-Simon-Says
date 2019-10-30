@@ -3,3 +3,10 @@ Rectangles are for internal processing
 Trapezoids are for Input/Output
 Diamonds are for Decisions
 
+When you start draw.io it will ask you where you plan to save, select "show more" and then "Git hub"
+It will ask you to authorize access and enter your password
+Now you should be able to "Open Existing Diagram"
+Under select file click "stephenspruill/Final-Project-Simon-Says"
+Select "Simon Flow Chart.drawio"
+Edit the flowchart
+Periodically a bar will appear to the right of the "File, Edit, View..." menu saying "Unsaved changes. Click here to save," click it
