@@ -29,3 +29,5 @@ _start:
 I simply set the 3 bits that control pin 14 to 001 which are bit 12,13 and 14 and then enabled pin 14 by putting 1 in it 
 and after that I just sent on which is 28 + the base address, (I looked up the manual for that). Hope that helps
 -------------------------------------------------------------------------------------------------------------------------
+
+https://www.raspberrypi.org/forums/viewtopic.php?t=39897 Example code of blinking an LED using assembly 
