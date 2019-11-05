@@ -36,6 +36,7 @@ while(power is on):
         outputGameOver()
     elif(difficulty == 1):
         #copy paste code once finished implementing easy difficulty
+        #not necssary, difficulty will just alter a global timer variable
     elif(difficulty == 2):
         #copy paste code once finished implementing other difficulties
     #if we want more difficulties we can add more; just adjust the times within determineTimeAllowed()
@@ -48,7 +49,7 @@ def startUpSequence():
 
 def generateRandNum():
     #generate a random num; will need rand library
-    #returns an int
+    #returns an int 0-3
 
 def outputSequenceTones():
     for i in expectedSequence:
@@ -64,6 +65,8 @@ def outputGameOver():
     #returns nothing
 
 def determineTimeAllowed(int difficulty):
+    # difficulty will change delay between output instances making the 
+    # output sequece faster for higher difficulty
     if(difficulty == 0):
         #time allowed should be for example 5 seconds
     elif (difficulty == 1):
