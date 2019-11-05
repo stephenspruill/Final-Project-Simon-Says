@@ -1,0 +1,15 @@
+import random
+#red = 1, yellow = 2, blue = 3, green = 4
+colors = [1, 2, 3, 4]
+# get the random color
+value = random.choice(colors)
+print (value)
+
+#user input for correct color
+c = input('Enter color:\n')
+
+#validate user input and random color
+while value == c:
+    print (value)
+    value += color
+    print(value)
