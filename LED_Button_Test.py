@@ -26,23 +26,23 @@ sleep(1)
 ledY.off()
 
 While True:
-    butG.wait_for_press()
-    ledG.on()
-    sleep(.1)
-    ledG.off()
+    if butG.is_pressed:
+        ledG.on()
+        sleep(.1)
+        ledG.off()
 
-    butR.wait_for_press()
-    ledR.on()
-    sleep(.1)
-    ledR.off()
+    elif butR.is_pressed:
+        ledR.on()
+        sleep(.1)
+        ledR.off()
 
-    butB.wait_for_press()
-    ledB.on()
-    sleep(.1)
-    ledB.off()
+    elif butB.is_pressed:
+        ledB.on()
+        sleep(.1)
+        ledB.off()
 
-    butY.wait_for_press()
-    ledY.on()
-    sleep(.1)
-    ledY.off()
+    elif butY.is_pressed:
+        ledY.on()
+        sleep(.1)
+        ledY.off()
     
