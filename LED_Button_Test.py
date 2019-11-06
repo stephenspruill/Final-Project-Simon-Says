@@ -1,4 +1,5 @@
-from gpiozero import LED, Button
+from gpiozero import LED, Button, TonalBuzzer
+from gpiozero.tones import Tone
 from time import sleep
 
 ledG = LED(26)
@@ -11,38 +12,67 @@ butR = Button(16)
 butB = Button(12)
 butY = Button(5)
 
-# Startup sequence
-ledG.on()
-sleep(1)
-ledG.off()
-ledR.on()
-sleep(1)
-ledR.off()
-ledB.on()
-sleep(1)
-ledB.off()
-ledY.on()
-sleep(1)
-ledY.off()
+bz = TonalBuzzer(25)
 
-While True:
+time1 = 0.25
+time2 = 0.125
+
+# define output functions
+def green(time):
+    ledG.on()
+    bz.play(Tone(659.255))
+    sleep(time)
+    ledG.off()
+    sleep(time)
+    bz.stop()
+    return;
+
+def red(time):
+    ledR.on()
+    bz.play(Tone(440))
+    sleep(time)
+    ledR.off()
+    sleep(time)
+    bz.stop()
+    return;
+
+def blue(time):
+    ledB.on()
+    bz.play(Tone(329.628))
+    sleep(time)
+    ledB.off()
+    sleep(time)
+    bz.stop()    
+    return;
+
+def yellow(time):
+    ledY.on()
+    bz.play(Tone(554.365))
+    sleep(time)
+    ledY.off()
+    sleep(time)
+    bz.stop()
+    return;
+
+# Startup sequence
+green(time1)
+red(time1)
+blue(time1)
+yellow(time1)
+green(time2)
+red(time2)
+blue(time2)
+yellow(time2)
+
+while True:
     if butG.is_pressed:
-        ledG.on()
-        sleep(.1)
-        ledG.off()
+        green(time1)
 
     elif butR.is_pressed:
-        ledR.on()
-        sleep(.1)
-        ledR.off()
+        red(time1)
 
     elif butB.is_pressed:
-        ledB.on()
-        sleep(.1)
-        ledB.off()
-
+        blue(time1)
+        
     elif butY.is_pressed:
-        ledY.on()
-        sleep(.1)
-        ledY.off()
-    
+        yellow(time1)
