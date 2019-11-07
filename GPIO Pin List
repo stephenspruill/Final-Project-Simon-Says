@@ -1,0 +1,19 @@
+Inputs:
+GP4 = Difficulty Button
+GP6 = Green Button
+GP12 = Blue Button
+GP13 = Yellow Button
+GP16 = Red Button
+GP18 = Start Button
+GP23 = Last Button
+GP24 = Longest Button
+
+Outputs:
+GP17 = RGB LED 1
+GP19 = Yellow LED
+GP20 = Blue LED
+GP21 = Red LED
+GP22 = RGB LED 2
+GP25 = Speaker
+GP26 = Green LED
+GP27 = RGB LED 3
