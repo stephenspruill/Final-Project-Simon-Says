@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2019-10-31T16:44:08.413Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36" etag="4-iErNRQ6zdLlLXhPc8_" version="12.1.9" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-11-07T16:57:28.800Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0" etag="gQGBNnkcTSNp2XfD13Fu" version="12.2.2" type="github" pages="1">
   <diagram id="vK2o-zo6DBCBCjjgS45Z" name="Page-1">
-    <mxGraphModel dx="1168" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="555" dy="307" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -20,7 +20,7 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="SfQTYZYUw8lY2vtOCrOL-4" target="biyX1mUiOnCgqSZNUavs-1" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="SfQTYZYUw8lY2vtOCrOL-4" target="2XaEiHZqnn_djsdHWynS-11">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" parent="1" source="SfQTYZYUw8lY2vtOCrOL-4" target="2XaEiHZqnn_djsdHWynS-11" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="600" y="280" as="targetPoint"/>
           </mxGeometry>
@@ -28,7 +28,7 @@
         <mxCell id="SfQTYZYUw8lY2vtOCrOL-4" value="&lt;div&gt;2. Check Difficulty Switch. Set Parameter and RGB LED Accordingly&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="240" y="260" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="SfQTYZYUw8lY2vtOCrOL-6" target="2XaEiHZqnn_djsdHWynS-4">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;targetPerimeterSpacing=0;" parent="1" source="SfQTYZYUw8lY2vtOCrOL-6" target="2XaEiHZqnn_djsdHWynS-4" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="SfQTYZYUw8lY2vtOCrOL-6" value="1. Startup LED Sequence" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -56,7 +56,7 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="biyX1mUiOnCgqSZNUavs-5" target="biyX1mUiOnCgqSZNUavs-7" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="biyX1mUiOnCgqSZNUavs-5" target="2XaEiHZqnn_djsdHWynS-16">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" parent="1" source="biyX1mUiOnCgqSZNUavs-5" target="2XaEiHZqnn_djsdHWynS-16" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="570" y="470" as="targetPoint"/>
           </mxGeometry>
@@ -67,7 +67,7 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="biyX1mUiOnCgqSZNUavs-7" target="biyX1mUiOnCgqSZNUavs-9" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;targetPerimeterSpacing=0;" edge="1" parent="1" source="biyX1mUiOnCgqSZNUavs-7" target="2XaEiHZqnn_djsdHWynS-13">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;targetPerimeterSpacing=0;" parent="1" source="biyX1mUiOnCgqSZNUavs-7" target="2XaEiHZqnn_djsdHWynS-13" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="520" y="480" as="targetPoint"/>
             <Array as="points">
@@ -82,7 +82,7 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="biyX1mUiOnCgqSZNUavs-9" target="biyX1mUiOnCgqSZNUavs-11" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="biyX1mUiOnCgqSZNUavs-9" target="2XaEiHZqnn_djsdHWynS-18">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" parent="1" source="biyX1mUiOnCgqSZNUavs-9" target="2XaEiHZqnn_djsdHWynS-18" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="560" y="730" as="targetPoint"/>
           </mxGeometry>
@@ -106,7 +106,7 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-16" value="N" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="biyX1mUiOnCgqSZNUavs-11" target="biyX1mUiOnCgqSZNUavs-15" edge="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="biyX1mUiOnCgqSZNUavs-11" target="2XaEiHZqnn_djsdHWynS-20">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" parent="1" source="biyX1mUiOnCgqSZNUavs-11" target="2XaEiHZqnn_djsdHWynS-20" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="560" y="890" as="targetPoint"/>
           </mxGeometry>
@@ -123,7 +123,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="biyX1mUiOnCgqSZNUavs-15" target="2XaEiHZqnn_djsdHWynS-22">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;targetPerimeterSpacing=0;" parent="1" source="biyX1mUiOnCgqSZNUavs-15" target="2XaEiHZqnn_djsdHWynS-22" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="540" y="1040" as="targetPoint"/>
             <Array as="points">
@@ -134,28 +134,28 @@
         <mxCell id="biyX1mUiOnCgqSZNUavs-15" value="&lt;div&gt;Output Harsh&lt;/div&gt;&lt;div&gt;Tone and Flash&lt;/div&gt;&lt;div&gt;All LEDs&lt;br&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="240" y="900" width="120" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-1" value="Variable Legend&lt;br&gt;-----------------------------&lt;br&gt;Output 1: Green LED&lt;br&gt;Output 2: Red LED&lt;br&gt;Output 3: Blue LED&lt;br&gt;Output 4: Yellow LED&lt;br&gt;Output 5: RGB LED&lt;br&gt;Output 6: Tones&lt;br&gt;&lt;br&gt;Input 1: Difficulty Button&lt;br&gt;Input 2: Green Button&lt;br&gt;Input 3: Red Button&lt;br&gt;Input 4: Blue Button&lt;br&gt;Input 5: Yellow Button&lt;br&gt;Input 6: RBG Button&lt;br&gt;Input 7: Last Played&lt;br&gt;Input 8: Longest Sequence" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-1" value="Variable Legend&lt;br&gt;-----------------------------&lt;br&gt;Output 1: Green LED&lt;br&gt;Output 2: Red LED&lt;br&gt;Output 3: Blue LED&lt;br&gt;Output 4: Yellow LED&lt;br&gt;Output 5: RGB LED&lt;br&gt;Output 6: Tones&lt;br&gt;&lt;br&gt;Input 1: Difficulty Button&lt;br&gt;Input 2: Green Button&lt;br&gt;Input 3: Red Button&lt;br&gt;Input 4: Blue Button&lt;br&gt;Input 5: Yellow Button&lt;br&gt;Input 6: RBG Button&lt;br&gt;Input 7: Last Played&lt;br&gt;Input 8: Longest Sequence" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry width="150" height="320" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-4" value="Output 1 turn on&lt;br&gt;wait&lt;br&gt;Output 1 turn off&lt;br&gt;Output 2 turn on&lt;br&gt;wait&lt;br&gt;Output 2 turn off&lt;br&gt;Output 3 turn on&lt;br&gt;wait&lt;br&gt;Output 3 turn off&lt;br&gt;Output 4 turn on&lt;br&gt;wait&lt;br&gt;Output 4 turn off&lt;br&gt;Output 1,2,3,4 on&lt;br&gt;wait&lt;br&gt;Output 1,2,3,4 off&lt;br&gt;wait for input" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-4" value="Output 1 turn on&lt;br&gt;wait&lt;br&gt;Output 1 turn off&lt;br&gt;Output 2 turn on&lt;br&gt;wait&lt;br&gt;Output 2 turn off&lt;br&gt;Output 3 turn on&lt;br&gt;wait&lt;br&gt;Output 3 turn off&lt;br&gt;Output 4 turn on&lt;br&gt;wait&lt;br&gt;Output 4 turn off&lt;br&gt;Output 1,2,3,4 on&lt;br&gt;wait&lt;br&gt;Output 1,2,3,4 off&lt;br&gt;wait for input" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="20" width="230" height="230" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-11" value="set output 5 to green (default difficulty (easy))&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to yellow (medium)&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to red (hard)&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to green" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-11" value="set output 5 to green (default difficulty (easy))&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to yellow (medium)&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to red (hard)&lt;br&gt;if input 6 is pressed&lt;br&gt;set output 5 to green" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="260" width="140" height="140" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-13" value="cycle through array starting at index 0&lt;br&gt;if element is &quot;0&quot; flash output 1, play tone&lt;br&gt;if element is &quot;1&quot; flash output 2, play tone&lt;br&gt;if element is &quot;2&quot; flash output 3, play tone&lt;br&gt;if element is &quot;3&quot; flash output 4, play tone" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-13" value="cycle through array starting at index 0&lt;br&gt;if element is &quot;0&quot; flash output 1, play tone&lt;br&gt;if element is &quot;1&quot; flash output 2, play tone&lt;br&gt;if element is &quot;2&quot; flash output 3, play tone&lt;br&gt;if element is &quot;3&quot; flash output 4, play tone" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="530" width="150" height="150" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-16" value="random number generated (0-4)&lt;br&gt;append to array&lt;br&gt;[#,#,#...]" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-16" value="random number generated (0-3)&lt;br&gt;append to array&lt;br&gt;[#,#,#...]" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="410" width="110" height="110" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-18" value="receive input from user&lt;br&gt;append each input into array" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-18" value="receive input from user&lt;br&gt;append each input into array" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="690" width="140" height="140" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-20" value="compare input array with output array&lt;br&gt;if matching, loop back to generate next array entry&lt;br&gt;if not, begin end sequence" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-20" value="compare input array with output array&lt;br&gt;if matching, loop back to generate next array entry&lt;br&gt;if not, begin end sequence" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="840" width="140" height="140" as="geometry"/>
         </mxCell>
-        <mxCell id="2XaEiHZqnn_djsdHWynS-22" value="flash outputs 1,2,3,4 3 times, play 3 tones&lt;br&gt;loop back to startup sequence" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="2XaEiHZqnn_djsdHWynS-22" value="flash outputs 1,2,3,4 3 times, play 3 tones&lt;br&gt;loop back to startup sequence" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="600" y="990" width="100" height="100" as="geometry"/>
         </mxCell>
       </root>
