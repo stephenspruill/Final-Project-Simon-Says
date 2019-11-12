@@ -33,3 +33,5 @@ and after that I just sent on which is 28 + the base address, (I looked up the m
 https://www.raspberrypi.org/forums/viewtopic.php?t=39897 Example code of blinking an LED using assembly 
 
 https://www.raspberrypi.org/app/uploads/2012/02/BCM2835-ARM-Peripherals.pdf Manual
+
+http://www.science.smith.edu/dftwiki/index.php/Tutorial:_Assembly_Language_with_the_Raspberry_Pi#Assembly_Version
