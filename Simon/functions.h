@@ -1,0 +1,4 @@
+#ifndef SIMON_FUNCTIONS_H
+#define SIMON_FUNCTIONS_H
+
+#endif //SIMON_FUNCTIONS_H
