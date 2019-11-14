@@ -9,6 +9,12 @@ https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-api
 https://www.raspberrypi.org/documentation/usage/gpio/
 https://pythonprogramming.net/gpio-raspberry-pi-tutorials/
 
+wiringpi links:
+https://github.com/WiringPi/WiringPi-Python/tree/master/examples
+https://raspi.tv/2013/how-to-use-wiringpi2-for-python-on-the-raspberry-pi-in-raspbian
+https://www.raspberrypi.org/forums/viewtopic.php?t=141752
+https://github.com/Gadgetoid/WiringPi2-Python/blob/master/README
+
 im still looking more into it, ill post anything new that i find
 if im looking at the wrong the stuff, be sure to let me know guys
 
