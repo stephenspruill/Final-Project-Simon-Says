@@ -8,7 +8,7 @@ using namespace std;
 void startUpSequence();
 int generateRandomNum();
 void outputSequenceTones();
-void checkIfUserCorrect();
+bool checkIfUserCorrect();
 void outputGameOver();
 void determineTimerLength();
 
