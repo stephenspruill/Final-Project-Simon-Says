@@ -8,6 +8,9 @@ int difficulty = 0;
 int timer = 0.0;
 vector<int> expectedSequence;
 vector<int> userSequence;
+vector<int> easyHighSequence;
+vector<int> mediumHighSequence;
+vector<int> hardHighSequence;
 
 
 //global tracking variables
