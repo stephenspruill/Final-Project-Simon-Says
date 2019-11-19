@@ -51,9 +51,12 @@ int main()
 						userSequence.push_back(userInput);
 						count++;
 					}
-				checkIfUserCorrect();
-		
-				
+					
+					if(!checkIfUserCorrect())
+					{
+						//user was not correct
+						continueGame = false;
+					}
 				}
 			}
 		else if( difficulty == 1)
@@ -93,7 +96,7 @@ void outputSequenceTones(){
     }
 }
 
-void checkIfUserCorrect(){
+bool checkIfUserCorrect(){
     bool wasUserCorrect = true;
     for(int i = 0; i < /*size*/ && wasUserCorrect; i++){
         if(/*expectedSequence[i] != userSequence[i]*/){
@@ -106,6 +109,7 @@ void checkIfUserCorrect(){
             /*userSequence.clear()*/
         }
     }
+	return wasUserCorrect;
 }
 
 void outputGameOver(){
