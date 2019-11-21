@@ -1,5 +1,5 @@
 // to compile, run the following in terminal
-//g++ -std=c++0x SequenceTest.cpp -otest -lwiringPi -lpthread
+//g++ -std=c++0x btest.cpp -obtest -lwiringPi -lpthread
 //sudo ./test
 
 #include <iostream>
@@ -11,6 +11,12 @@
 #include <softTone.h>
 
 using namespace std;
+
+//functionprototypes
+void green(int, int);
+void red(int, int);
+void blue(int, int);
+void yellow(int, int);
 
 int main()
 {
@@ -42,6 +48,13 @@ int main()
 	int userInput = 0;
 	vector<int> seq;
 	vector<int> userSeq;
+	int timer1 = 500;
+	int timer2 = 200;
+	int timer3 = 25;
+	int gtone = 659;
+	int rtone = 440;
+	int btone = 330;
+	int ytone = 554;
 	
 	while(!gameOver)
 	{
@@ -58,36 +71,20 @@ int main()
 			switch(seq[i])
 			{
 				case 0:
-					delay(200);
-					digitalWrite (26, HIGH);
-					softToneWrite(25, 659);
-					delay(500);
-					digitalWrite (26, LOW);
-					softToneWrite(25, 0);
+					green(timer1, gtone);
+					delay(timer2);
 					break;
 				case 1:
-					delay(200);
-					digitalWrite (21, HIGH);
-					softToneWrite(25, 440);
-					delay(500);
-					digitalWrite (21, LOW);
-					softToneWrite(25, 0);
+					red(timer1, rtone);
+					delay(timer2);
 					break;
 				case 2:
-					delay(200);
-					digitalWrite (20, HIGH);
-					softToneWrite(25, 330);
-					delay(500);
-					digitalWrite (20, LOW);
-					softToneWrite(25, 0);
+					blue(timer1, btone);
+					delay(timer2);
 					break;
 				case 3:
-					delay(200);
-					digitalWrite (19, HIGH);
-					softToneWrite(25, 554);
-					delay(500);
-					digitalWrite (19, LOW);
-					softToneWrite(25, 0);
+					yellow(timer1, ytone);
+					delay(timer2);
 					break;
 			}
 		}
@@ -100,44 +97,28 @@ int main()
 			{
 				if(digitalRead(6) == 0)
 				{
-					digitalWrite (26, HIGH);
-					softToneWrite(25, 659);
-					delay(500);
-					digitalWrite (26, LOW);
-					softToneWrite(25, 0);
+					green(timer1, gtone);
 					userInput = 0;
 					cout << userInput << endl;
 					userChoice = true;
 				}
 				if(digitalRead(16) == 0)
 				{
-					digitalWrite (21, HIGH);
-					softToneWrite(25, 440);
-					delay(500);
-					digitalWrite (21, LOW);
-					softToneWrite(25, 0);
+					red(timer1, rtone);
 					userInput = 1;
 					cout << userInput << endl;
 					userChoice = true;
 				}
 				if(digitalRead(12) == 0)
 				{
-					digitalWrite (20, HIGH);
-					softToneWrite(25, 330);
-					delay(500);
-					digitalWrite (20, LOW);
-					softToneWrite(25, 0);
+					blue(timer1, btone);
 					userInput = 2;
 					cout << userInput << endl;
 					userChoice = true;
 				}
 				if(digitalRead(13) == 0)
 				{
-					digitalWrite (19, HIGH);
-					softToneWrite(25, 554);
-					delay(500);
-					digitalWrite (19, LOW);
-					softToneWrite(25, 0);
+					yellow(timer1, ytone);
 					userInput = 3;
 					cout << userInput << endl;
 					userChoice = true;
@@ -154,30 +135,10 @@ int main()
 					cout << "Incorrect!" << endl;
 					for(i=0;i<=20;i++)
 					{
-						digitalWrite (26, HIGH);
-						digitalWrite (20, HIGH);
-						softToneWrite(25, 150);
-						delay(25);
-						digitalWrite (26, LOW);
-						digitalWrite (20, LOW);
-						digitalWrite (21, HIGH);
-						digitalWrite (19, HIGH);												
-						softToneWrite(25, 75);
-						delay(25);
-						digitalWrite (21, LOW);
-						digitalWrite (19, LOW);
-						digitalWrite (26, HIGH);
-						digitalWrite (20, HIGH);						
-						softToneWrite(25, 125);
-						delay(25);
-						digitalWrite (26, LOW);
-						digitalWrite (20, LOW);
-						digitalWrite (21, HIGH);
-						digitalWrite (19, HIGH);						
-						softToneWrite(25, 50);
-						delay(25);
-						digitalWrite (21, LOW);
-						digitalWrite (19, LOW);					
+						green(timer3, 150);
+						red(timer3, 75);
+						blue(timer3, 125);
+						yellow(timer3, 50);					
 					}
 					userFail = true;
 					break;
@@ -196,4 +157,41 @@ int main()
 	}
 	cout << "Thanks for playing!" << endl;
 	return 0;
+}
+
+// functions
+void green(int time, int tone)
+{
+	system("/home/pi/code/LEDs/gon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/gof");
+	softToneWrite(25, 0);
+}
+
+void red(int time, int tone)
+{
+	system("/home/pi/code/LEDs/ron");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/rof");
+	softToneWrite(25, 0);
+}
+
+void blue(int time, int tone)
+{
+	system("/home/pi/code/LEDs/bon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/bof");
+	softToneWrite(25, 0);
+}
+
+void yellow(int time, int tone)
+{
+	system("/home/pi/code/LEDs/yon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/yof");
+	softToneWrite(25, 0);
 }
