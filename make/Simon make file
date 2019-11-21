@@ -1,7 +1,7 @@
 CC = g++ // standard c++ compiler or use CXX
 CFLAGS = -c -Wall
 LDFLAGS = 
-SOURCES = main.cpp functions.cpp
+SOURCES = SequenceTest.cpp // main.cpp functions.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=simon
 
