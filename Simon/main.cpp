@@ -2,6 +2,9 @@
 #include <iomanip>
 #include <ctime>
 #include "main.h"
+#include <wiringPi.h>
+#include <stdlib.h>
+#include <softTone.h>
 
 //Global Variables
 int difficulty = 0;
@@ -12,6 +15,9 @@ vector<int> expectedSequence;
 vector<int> userSequence;
 
 //Scoring Vectors
+int easyHighCount,
+	mediumHighCount,
+	hardHighCount;
 vector<int> easyHighSequence;
 vector<int> mediumHighSequence;
 vector<int> hardHighSequence;
