@@ -15,39 +15,79 @@ vector<int> expectedSequence;
 vector<int> userSequence;
 
 //Scoring Vectors
-int easyHighCount,
-	mediumHighCount,
-	hardHighCount;
-vector<int> easyHighSequence;
+vector<int> easyHighSequence; //Need to read/write the *Sequence vectors from external file
 vector<int> mediumHighSequence;
 vector<int> hardHighSequence;
 
 int main()
 {
-	bool power = true;
-	while (power == true)
+	//**********Variable Declaration*********
+	int easyHighCount,  //Need to read/write the *Count values from external file
+		mediumHighCount,
+		hardHighCount,
+		easyTempCount,
+		mediumTempCount,
+		hardTempCount;
+	int timer1 = 500,
+		timer2 = 200,
+		timer3 = 25,
+		gTone = 659,
+		rTone = 440,
+		bTone = 330,
+		yTone = 554,
+		selTone = 880;
+	
+	//**********Startup Sequence**********
+	startUpSequence();
+
+	//**********Mode Select Loop**********
+	bool start = false;
+	while (start == false)
 	{
-		startUpSequence();
+		//display current difficulty led (flashing?)
+		//monitor difficulty select button and change difficulty as needed
+		//monitor high sequence button and last button
+		//monitor start button as exit from this while loop
+		if(digitalRead(4) == 0) //check difficulty button
+		{
+
+		}
+		if(digitalRead(24) == 0) //high sequence button
+		{
+
+		}
+		if(digitalRead(23) == 0) //last button
+		{
+
+		}
+		if(digitalRead(18) == 0) //start button
+		{
+			start = true;
+		}
+	}
+	
+	while (start == true)
+	{
 		waitForResponse();
 		difficulty = // value from game board, from difficulty slider/button
 		if (difficulty == 0) // easy difficulty
 		{
 			determineTimerLength();
 			int count = 0;
-		
-		
+
+
 			bool continueGame = true;
 			while (continueGame == true)
 			{
 				int num = generateRandomNum();
 				expectedSequence.push_back(num);
-			
+
 				outputSequenceTones();
 				result = true;
 				while (count < expectedSequence.size() && result)
 				{
 					waitForResponse();
-				
+
 					if(userInput != expectedSequence[count])
 					{
 						result = false;
@@ -57,7 +97,7 @@ int main()
 						userSequence.push_back(userInput);
 						count++;
 					}
-					
+
 					if(!checkIfUserCorrect())
 					{
 						//user was not correct
@@ -75,10 +115,75 @@ int main()
 		}
 		}
 	}	
+	
 }
 
+//**********LED and Sound Functions**********
+void green(int time, int tone){
+	system("/home/pi/code/LEDs/gon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/gof");
+	softToneWrite(25, 0);
+}
+
+void red(int time, int tone){
+	system("/home/pi/code/LEDs/ron");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/rof");
+	softToneWrite(25, 0);
+}
+
+void blue(int time, int tone){
+	system("/home/pi/code/LEDs/bon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/bof");
+	softToneWrite(25, 0);
+}
+
+void yellow(int time, int tone){
+	system("/home/pi/code/LEDs/yon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/yof");
+	softToneWrite(25, 0);
+}
+
+void easyLED(int time, int tone){
+	system("/home/pi/code/LEDs/eon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/eof");
+	softToneWrite(25, 0);
+}
+
+void mediumLED(int time, int tone){
+	system("/home/pi/code/LEDs/mon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/mof");
+	softToneWrite(25, 0);
+}
+
+void hardLED(int time, int tone){
+	system("/home/pi/code/LEDs/hon");
+	softToneWrite(25, tone);
+	delay(time);
+	system("/home/pi/code/LEDs/hof");
+	softToneWrite(25, 0);
+}
+
+//**********Sequence Functions**********
 void startUpSequence(){
-    //output lights to flash
+	green(timer1, gtone);
+	red(timer1, rtone);
+	blue(timer1, btone);
+	yellow(timer1, ytone);
+	easyLED(timer1, selTone);
+	mediumLED(timer1, selTone);
+	hardLED(timer1, selTone);
 }
 
 int generateRandomNum(){
