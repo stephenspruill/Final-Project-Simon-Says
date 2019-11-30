@@ -36,21 +36,40 @@ int main()
 		bTone = 330,
 		yTone = 554,
 		selTone = 880;
-	
+	bool start = false;
+
 	//**********Startup Sequence**********
 	startUpSequence();
 
 	//**********Mode Select Loop**********
-	bool start = false;
 	while (start == false)
 	{
 		//display current difficulty led (flashing?)
-		//monitor difficulty select button and change difficulty as needed
-		//monitor high sequence button and last button
-		//monitor start button as exit from this while loop
+		if(difficulty == 0){
+			system("/home/pi/code/LEDs/eof");
+			delay(50);
+			system("/home/pi/code/LEDs/eon");
+		}
+		if(difficulty == 1){
+			system("/home/pi/code/LEDs/mof");
+			delay(50);
+			system("/home/pi/code/LEDs/mon");
+		}
+		if(difficulty == 2){
+			system("/home/pi/code/LEDs/hof");
+			delay(50);
+			system("/home/pi/code/LEDs/hon");
+		}
 		if(digitalRead(4) == 0) //check difficulty button
 		{
-
+			system("/home/pi/code/LEDs/eof");
+			system("/home/pi/code/LEDs/mof");
+			system("/home/pi/code/LEDs/hof");
+			if (difficulty <= 2)
+				difficulty ++;
+			else
+				difficulty = 0;
+			
 		}
 		if(digitalRead(24) == 0) //high sequence button
 		{
@@ -155,24 +174,18 @@ void easyLED(int time, int tone){
 	system("/home/pi/code/LEDs/eon");
 	softToneWrite(25, tone);
 	delay(time);
-	system("/home/pi/code/LEDs/eof");
-	softToneWrite(25, 0);
 }
 
 void mediumLED(int time, int tone){
 	system("/home/pi/code/LEDs/mon");
 	softToneWrite(25, tone);
 	delay(time);
-	system("/home/pi/code/LEDs/mof");
-	softToneWrite(25, 0);
 }
 
 void hardLED(int time, int tone){
 	system("/home/pi/code/LEDs/hon");
 	softToneWrite(25, tone);
 	delay(time);
-	system("/home/pi/code/LEDs/hof");
-	softToneWrite(25, 0);
 }
 
 //**********Sequence Functions**********
