@@ -40,101 +40,96 @@ int main()
 
 	//**********Startup Sequence**********
 	startUpSequence();
-
-	//**********Mode Select Loop**********
-	while (start == false)
-	{
-		//display current difficulty led (flashing?)
-		if(difficulty == 0){
-			system("/home/pi/code/LEDs/eof");
-			delay(50);
-			system("/home/pi/code/LEDs/eon");
-		}
-		if(difficulty == 1){
-			system("/home/pi/code/LEDs/mof");
-			delay(50);
-			system("/home/pi/code/LEDs/mon");
-		}
-		if(difficulty == 2){
-			system("/home/pi/code/LEDs/hof");
-			delay(50);
-			system("/home/pi/code/LEDs/hon");
-		}
-		if(digitalRead(4) == 0) //check difficulty button
-		{
-			system("/home/pi/code/LEDs/eof");
-			system("/home/pi/code/LEDs/mof");
-			system("/home/pi/code/LEDs/hof");
-			if (difficulty <= 2)
-				difficulty ++;
-			else
-				difficulty = 0;
-			
-		}
-		if(digitalRead(24) == 0) //high sequence button
-		{
-
-		}
-		if(digitalRead(23) == 0) //last button
-		{
-
-		}
-		if(digitalRead(18) == 0) //start button
-		{
-			start = true;
-		}
-	}
 	
-	while (start == true)
+	while (1)
 	{
-		waitForResponse();
-		difficulty = // value from game board, from difficulty slider/button
-		if (difficulty == 0) // easy difficulty
+		//**********Mode Select Loop**********
+		while (start == false)
 		{
-			determineTimerLength();
-			int count = 0;
-
-
-			bool continueGame = true;
-			while (continueGame == true)
+			//display current difficulty LED
+			if(difficulty == 0){
+				system("/home/pi/code/LEDs/eon");
+			}
+			if(difficulty == 1){
+				system("/home/pi/code/LEDs/mon");
+			}
+			if(difficulty == 2){
+				system("/home/pi/code/LEDs/hon");
+			}
+			if(digitalRead(4) == 0) //check difficulty button
 			{
-				int num = generateRandomNum();
-				expectedSequence.push_back(num);
+				system("/home/pi/code/LEDs/eof");
+				system("/home/pi/code/LEDs/mof");
+				system("/home/pi/code/LEDs/hof");
+				if (difficulty <= 2)
+					difficulty ++;
+				else
+					difficulty = 0;
+			}
+			if(digitalRead(24) == 0) //high sequence button
+			{
 
-				outputSequenceTones();
-				result = true;
-				while (count < expectedSequence.size() && result)
+			}
+			if(digitalRead(23) == 0) //last button
+			{
+
+			}
+			if(digitalRead(18) == 0) //start button
+			{
+				start = true;
+			}
+		}
+
+		while (start == true)
+		{
+			waitForResponse();
+			difficulty = // value from game board, from difficulty slider/button
+			if (difficulty == 0) // easy difficulty
+			{
+				determineTimerLength();
+				int count = 0;
+
+
+				bool continueGame = true;
+				while (continueGame == true)
 				{
-					waitForResponse();
+					int num = generateRandomNum();
+					expectedSequence.push_back(num);
 
-					if(userInput != expectedSequence[count])
+					outputSequenceTones();
+					result = true;
+					while (count < expectedSequence.size() && result)
 					{
-						result = false;
-					}
-					else
-					{
-						userSequence.push_back(userInput);
-						count++;
-					}
+						waitForResponse();
 
-					if(!checkIfUserCorrect())
-					{
-						//user was not correct
-						continueGame = false;
+						if(userInput != expectedSequence[count])
+						{
+							result = false;
+						}
+						else
+						{
+							userSequence.push_back(userInput);
+							count++;
+						}
+
+						if(!checkIfUserCorrect())
+						{
+							//user was not correct
+							continueGame = false;
+						}
 					}
 				}
+			else if( difficulty == 1)
+			{
+				//copy paste code once finished implementing easy difficulty
 			}
-		else if( difficulty == 1)
-		{
-			//copy paste code once finished implementing easy difficulty
-		}
-		else if(difficulty == 2)
-		{
-			//copy paste code once finished implementing easy difficulty
-		}
-		}
-	}	
-	
+			else if(difficulty == 2)
+			{
+				//copy paste code once finished implementing easy difficulty
+			}
+			}
+		}	
+	}
 }
 
 //**********LED and Sound Functions**********
