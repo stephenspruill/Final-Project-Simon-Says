@@ -18,16 +18,16 @@ main:
 	
 	STR R0, [SP, #16]		//store virtual mem addr
 	LDR R3, [SP, #16]		//get virtual mem addr
-	ADD R3, R3, #8			//add 8 for block 2
+	ADD R3, R3, #4			//add 8 for block 2
 	LDR R2, [SP, #16]		//get virtual mem addr
-	ADD R2, R2, #8			//add 8 for block 2
+	ADD R2, R2, #4			//add 8 for block 2
 	LDR R2, [R2, #0]		//load R2 with value at R2
 	BIC R2, R2, #0B001<<6	//bitwise clear of three bits
 	STR R2, [R3, #0]		//store result [set input]
 	LDR R3, [SP, #16]		//get virtual mem addr
-	ADD R3, R3, #8			//add 8 for block 2
+	ADD R3, R3, #4			//add 8 for block 2
 	LDR R2, [SP, #16]		//get virtual mem addr
-	ADD R2, R2, #8			//add 8 for block 2
+	ADD R2, R2, #4			//add 8 for block 2
 	LDR R2, [R2, #0]		//load R2 with value at R2
 	ORR R2, R2, #1<<21		//set bit...
 	STR R2, [R3, #0]		//...and make output
