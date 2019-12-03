@@ -96,51 +96,71 @@ int main()
 				start = true;
 			}
 		}
-
-		while (start == true)
+		
+		//********** Gameplay Loop **********
+		while(!gameOver)
 		{
-			waitForResponse();
-			difficulty = // value from game board, from difficulty slider/button
-			if (difficulty == 0) // easy difficulty
+			cout << "Generating sequence..." << endl << endl;
+			randNum = rand() % 3;
+			seq.push_back(randNum);
+			delay(500);
+			for(int i = 0; i <= sequenceNum; i++)
 			{
-				determineTimerLength();
-				int count = 0;
-
-
-				bool continueGame = true;
-				while (continueGame == true)
-				{
-					int num = generateRandomNum();
-					expectedSequence.push_back(num);
-
-					outputSequenceTones();
-					result = true;
-					while (count < expectedSequence.size() && result)
-					{
-						waitForResponse();
-
-						if(userInput != expectedSequence[count])
-						{
-							result = false;
-						}
-						else
-						{
-							userSequence.push_back(userInput);
-							count++;
-						}
-
-						if(!checkIfUserCorrect())
-						{
-							//user was not correct
-							continueGame = false;
-						}
-					}
-				}
-
+				cout << "Debug: Sequence is: " << seq[i] << endl;
 			}
+			for(int i = 0; i <= sequenceNum; i++)
+			{
+				switch(seq[i])
+				{
+					case 0:
+						green(timer1, gtone);
+						delay(timer2);
+						break;
+					case 1:
+						red(timer1, rtone);
+						delay(timer2);
+						break;
+					case 2:
+						blue(timer1, btone);
+						delay(timer2);
+						break;
+					case 3:
+						yellow(timer1, ytone);
+						delay(timer2);
+						break;
+				}
+			}
+
+			cout << "\nMake your guess!" << endl;
+			cout << "Debug: Displaying user's choice" << endl << endl;
+			for(int i = 0; i <= sequenceNum && !userFail; i++)
+			{
+				while(!userChoice)
+				{
+					digitalRead();
+				}
+					userChoice = false;
+					userSeq.push_back(userInput);
+					cout << "\nDebug: Comparing your input of " << userSeq[i]
+						 << " with sequence input of " << seq[i] << endl;
+					delay(500);
+					if(userSeq[i] != seq[i])
+					{
+						notEqual();
+					}else
+					{
+						cout << "Correct!" << endl;
+					}
+			}
+			if(userFail)
+			{
+				cout << "Game Over!" << endl;
+				gameOver = true;
+			}
+			userSeq.clear();
+			sequenceNum++;
 		}	
 	}
-}
 
 //********** LED and Sound Functions **********
 void green(int time, int tone){
