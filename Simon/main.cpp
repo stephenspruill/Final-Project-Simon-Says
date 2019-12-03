@@ -23,7 +23,7 @@ vector<int> high; //High sequence vector to reduce if loops when calling sequenc
 
 int main()
 {
-	//**********Variable Declaration*********
+	//********** Variable Declaration *********
 	int easyHighCount,  //Need to read/write the *Count values from external file
 		mediumHighCount,
 		hardHighCount;
@@ -37,12 +37,12 @@ int main()
 		selTone = 880;
 	bool start = false;
 
-	//**********Startup Sequence**********
+	//********** Startup Sequence **********
 	startUpSequence();
 	
 	while (1)
 	{
-		//**********Mode Select Loop**********
+		//********** Mode Select Loop **********
 		while (start == false)
 		{
 			//display current difficulty LED
@@ -140,7 +140,7 @@ int main()
 	}
 }
 
-//**********LED and Sound Functions**********
+//********** LED and Sound Functions **********
 void green(int time, int tone){
 	system("/home/pi/code/LEDs/gon");
 	softToneWrite(25, tone);
@@ -191,7 +191,7 @@ void hardLED(int time, int tone){
 	delay(time);
 }
 
-//**********Sequence Functions**********
+//********** Sequence Functions **********
 void startUpSequence(){
 	green(timer1, gtone);
 	red(timer1, rtone);
@@ -208,6 +208,7 @@ int generateRandomNum(){
     return randNum
 }
 
+//********** Output Sequence *********
 void outputSequence(vector<int> &sequence){
     //will need access to expected sequence
     for(int i = 0; i < sequence.size(); i++){
