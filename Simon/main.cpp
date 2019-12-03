@@ -136,14 +136,7 @@ int main()
 						}
 					}
 				}
-			else if( difficulty == 1)
-			{
-				//copy paste code once finished implementing easy difficulty
-			}
-			else if(difficulty == 2)
-			{
-				//copy paste code once finished implementing easy difficulty
-			}
+
 			}
 		}	
 	}
