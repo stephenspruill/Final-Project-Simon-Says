@@ -6,9 +6,18 @@
 #include <stdlib.h>
 #include <softTone.h>
 
+using namespace std;
+
+//********** WiringPi input/tone setup **********
+wiringPiSetupGpio ();
+pinMode (6, INPUT);	//Green Button
+pinMode (16, INPUT);	//Red Button
+pinMode (12, INPUT);	//Blue Button
+pinMode (13, INPUT);	//Yellow Button
+softToneCreate (25);
+
 //Global Variables
 int difficulty = 0;
-int timer = 0.0;
 
 //Main Vectors to Be Compared
 vector<int> expectedSequence;
