@@ -6,8 +6,34 @@
 #include <stdlib.h>
 #include <softTone.h>
 #include <time.h>
+#include <fstream>
 
 using namespace std;
+
+//********** Function Prototypes **********
+void green(int, int);
+void red(int, int);
+void blue(int, int);
+void yellow(int, int);
+void easyLED(int, int);
+void mediumLED(int, int);
+void hardLED(int, int);
+
+void startUpSequence();
+int generateRandomNum();
+void outputSequence(vector<int> &);
+bool checkIfUserCorrect();
+void outputGameOver();
+void determineTimerLength();
+void getUserInput()
+void updateEasyHighSequence();
+void updateMediumHighSequence();
+void updateHardHighSequence();
+
+void writeEasyHighSequenceToFile();
+void writeMediumHighSequenceToFile();
+void writeHardHighSequenceToFile();
+void readHighSequencesFromFile();
 
 //********** WiringPi input/tone setup **********
 wiringPiSetupGpio ();
@@ -32,9 +58,18 @@ vector<int> mediumHighSequence;
 vector<int> hardHighSequence;
 vector<int> high; //High sequence vector to reduce if loops when calling sequence vectors
 
+//Read/Write File
+ifstream inFile;
+ofstream outFile;
+
+string easyHighSequenceFileName = "easyHighSequence.csv";
+string mediumHighSequenceFileName = "mediumHighSequence.csv";
+string hardHighSequenceFileName = "hardHighSequence.csv";
 
 int main()
 {
+	readHighScoreSequencesFromFile();
+	
 	//********** Variable Declaration *********
 	srand(time(0));		//Used to change the random seed during each startup
 	int easyHighCount,  	//Need to read/write the *Count values from external file
@@ -268,6 +303,16 @@ void outputGameOver()
 		blue(timer3, 125);
 		yellow(timer3, 50);					
 	}
+    if(difficulty == 0 && userSequence.size() > easyHighSequence.size()) {
+        updateEasyHighSequence();
+        writeEasyHighSequenceToFile();
+    } else if (difficulty == 1 && userSequence.size() > mediumHighSequence.size()) {
+        updateMediumHighSequence();
+        writeMediumHighSequencesToFile();
+    } else if (difficulty == 2 && userSequence.size() > hardHighSequence.size()) {
+        updateHardHighSequence();
+        writeHardHighSequencesToFile();
+    }
 }
 
 void determineTimerLength(){
@@ -311,4 +356,116 @@ void getUserInput()
 		userChoice = true;
 	}
 				
+}
+
+void updateEasyHighSequence(){
+    easyHighSequence.clear();
+    for(int i = 0; i < userSequence.size(); i++){
+        easyHighSequence.push_back(userSequence[i]);
+    }
+}
+
+void updateMediumHighSequence(){
+    mediumHighSequence.clear();
+    for(int i = 0; i < userSequence.size(); i++){
+        mediumHighSequence.push_back(userSequence[i]);
+    }
+}
+
+void updateHardHighSequence(){
+    hardHighSequence.clear();
+    for(int i = 0; i < userSequence.size(); i++){
+        hardHighSequence.push_back(userSequence[i]);
+    }
+}
+
+//********** Read/Write File **********
+
+void writeEasyHighSequenceToFile() {
+    //write out entire easy high sequence
+    outFile.open(easyHighSequenceFileName);
+    for (int i = 0; i < easyHighSequence.size(); i++) {
+        outFile << easyHighSequence[i] << ",";
+    }
+    outFile << endl;
+    outFile.close();
+    outFile.clear();
+}
+
+void writeMediumHighSequenceToFile() {
+    //write out entire medium high sequence
+    outFile.open(mediumHighSequenceFileName)
+    for (int i = 0; i < mediumHighSequence.size(); i++) {
+        outFile << mediumHighSequence[i] << ",";
+    }
+    outFile << endl;
+    outFile.close();
+    outFile.clear();
+}
+
+void writeHardHighSequenceToFile(){
+    //write out entire hard high sequence
+    outFile.open(hardHighSequenceFileName)
+    for(int i = 0; i < hardHighSequence.size(); i++){
+        outFile << hardHighSequence[i] << ",";
+    }
+    outFile << endl;
+    outFile.close();
+    outFile.clear();
+}
+
+void readHighSequencesFromFile(){
+    string line;
+    int i;
+
+    inFile.open(easyHighSequenceFileName);
+    getLine(inFile, line, '\n');
+    if(line.size() > 0) {
+        easyHighSequence.clear();
+        i = 0;
+        while (line[i] != '\n') {
+            if (line[i] != ',') {
+                easyHighSequence[i].push_back(line[i]);
+                i++;
+            } else {
+                i++;
+            }
+        }
+        inFile.close();
+        inFile.clear();
+    }
+
+    inFile.open(mediumHighSequenceFileName);
+    getLine(readMediumHighSequence, line, '\n');
+    if(line.size() > 0) {
+        mediumHighSequence.clear();
+        i = 0;
+        while (line[i] != '\n') {
+            if (line[i] != ',') {
+                mediumHighSequence[i].push_back(line[i]);
+                i++;
+            } else {
+                i++;
+            }
+        }
+        inFile.close();
+        inFile.clear();
+    }
+
+    inFile.open(hardHighSequenceFileName);
+    getLine(readHardHighSequence, line, '\n');
+    if(line.size() > 0) {
+        hardHighSequence.clear();
+        i = 0;
+        while (line[i] != '\n') {
+            if (line[i] != ',') {
+                hardHighSequence[i].push_back(line[i]);
+                i++;
+            } else {
+                i++;
+            }
+        }
+        inFile.close();
+        inFile.clear();
+    }
 }
