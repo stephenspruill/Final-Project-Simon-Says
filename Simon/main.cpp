@@ -200,18 +200,36 @@ int generateRandomNum(){
     return randNum
 }
 
-void outputSequenceTones(){
+void outputSequence(vector<int> &sequence){
     //will need access to expected sequence
-    for(int i = 0; i < /*size*/; i++){
-        if(/*expectedSequence[i] == 0*/){
-            //play sound for that certain button
-        }else if (/*expectedSequence[i] == 1*/){
-            //play sound for that certain button
-        }else if (/*expectedSequence[i] == 2*/){
-            //play sound for that certain button
-        }else if (/*expectedSequence[i] == 3*/){
-            //play sound for that certain button
-        }
+    for(int i = 0; i < sequence.size(); i++){
+	switch(sequence[i]){
+		case 0:
+			green(timer1, gtone);
+			delay(timer2);
+			break;
+		case 1:
+			red(timer1, rtone);
+			delay(timer2);
+			break;
+		case 2:
+			blue(timer1, btone);
+			delay(timer2);
+			break;
+		case 3:
+			yellow(timer1, ytone);
+			delay(timer2);
+			break;
+	}
+        /*if(sequence[i] == 0){
+            green(timer1, gtone);
+        }else if (sequence[i] == 1){
+            red(timer1, rtone);
+        }else if (sequence[i] == 2){
+            blue(timer1, btone);
+        }else if (sequence[i] == 3){
+            yellow(timer1, ytone);
+        }*/
     }
 }
 
