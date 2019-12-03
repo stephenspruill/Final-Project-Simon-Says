@@ -22,9 +22,7 @@ void hardLED(int, int);
 void startUpSequence();
 int generateRandomNum();
 void outputSequence(vector<int> &);
-bool checkIfUserCorrect();
 void outputGameOver();
-void determineTimerLength();
 void getUserInput()
 void updateEasyHighSequence();
 void updateMediumHighSequence();
@@ -278,22 +276,6 @@ void outputSequence(vector<int> &sequence){
     }
 }
 
-bool checkIfUserCorrect(){
-    bool wasUserCorrect = true;
-    for(int i = 0; i < /*size*/ && wasUserCorrect; i++){
-        if(/*expectedSequence[i] != userSequence[i]*/){
-            //user incorrect
-            wasUserCorrect = false;
-            outputGameOver();
-        } else {
-            //user was correct
-            /*score++*/
-            /*userSequence.clear()*/
-        }
-    }
-	return wasUserCorrect;
-}
-
 void outputGameOver()
 {
  	for(i=0;i<=20;i++)
@@ -312,16 +294,6 @@ void outputGameOver()
     } else if (difficulty == 2 && userSequence.size() > hardHighSequence.size()) {
         updateHardHighSequence();
         writeHardHighSequencesToFile();
-    }
-}
-
-void determineTimerLength(){
-    if(/*difficulty == 0*/){
-        /*timer = 3.0*/
-    }else if(/*difficulty == 1*/){
-        /*timer = 1.5*/
-    }else if(/*difficulty == 2*/){
-        /*timer = 0.5*/
     }
 }
 
