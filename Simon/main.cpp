@@ -48,13 +48,21 @@ int main()
 			//display current difficulty LED
 			if(difficulty == 0){
 				system("/home/pi/code/LEDs/eon");
-				
+				timer1 = 1000,
+				timer2 = 400;
+				high = easyHighSequence;
 			}
 			if(difficulty == 1){
 				system("/home/pi/code/LEDs/mon");
+				timer1 = (timer1 * .5);
+				timer2 = (timer2 * .5);
+				high = mediumHighSequence;
 			}
 			if(difficulty == 2){
 				system("/home/pi/code/LEDs/hon");
+				timer1 = (timer1 * .5);
+				timer2 = (timer2 * .5);
+				high = hardHighSequence;
 			}
 			if(digitalRead(4) == 0) //check difficulty button
 			{
@@ -68,11 +76,11 @@ int main()
 			}
 			if(digitalRead(24) == 0) //high sequence button
 			{
-				if (difficulty == 0)
+				outputSequence(high);
 			}
 			if(digitalRead(23) == 0) //last button
 			{
-
+				outputSequence(userSequence);
 			}
 			if(digitalRead(18) == 0) //start button
 			{
@@ -221,15 +229,6 @@ void outputSequence(vector<int> &sequence){
 			delay(timer2);
 			break;
 	}
-        /*if(sequence[i] == 0){
-            green(timer1, gtone);
-        }else if (sequence[i] == 1){
-            red(timer1, rtone);
-        }else if (sequence[i] == 2){
-            blue(timer1, btone);
-        }else if (sequence[i] == 3){
-            yellow(timer1, ytone);
-        }*/
     }
 }
 
