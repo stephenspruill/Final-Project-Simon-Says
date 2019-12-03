@@ -109,39 +109,45 @@ int main()
 			delay(timer2);
 			for(int i = 0; i <= sequenceNum; i++)
 			{
-				cout << "Debug: Sequence is: " << seq[i] << endl;
+				cout << "Debug: Sequence is: " << expectedSequence[i] << endl;
 			}
-			outputSequence(seq)
-
+			outputSequence(expectedSequence);
+			
 			cout << "\nMake your guess!" << endl;
 			cout << "Debug: Displaying user's choice" << endl << endl;
 			for(int i = 0; i <= sequenceNum && !userFail; i++)
 			{
 				while(!userChoice)
 				{
-					digitalRead();
+					getUserInput();
 				}
 					userChoice = false;
-					userSeq.push_back(userInput);
-					cout << "\nDebug: Comparing your input of " << userSeq[i]
-						 << " with sequence input of " << seq[i] << endl;
-					delay(500);
-					if(userSeq[i] != seq[i])
+					userSequence.push_back(userInput);
+					cout << "\nDebug: Comparing your input of " << userSequence[i]
+						 << " with sequence input of " << expectedSequence[i] << endl;
+					delay(timer2);
+					if(userSequence[i] != expectedSequence[i])
 					{
-						notEqual();
+						userFail = true;
+						cout << "Incorrect!" << endl;
+						break;
 					}else
 					{
 						cout << "Correct!" << endl;
 					}
+				}
 			}
+			
 			if(userFail)
 			{
+				outputGameOver();
 				cout << "Game Over!" << endl;
-				gameOver = true;
+				start = false;
 			}
-			userSeq.clear();
+			userSequence.clear();
 			sequenceNum++;
 		}	
+		sequenceNum = 0;
 	}
 
 //********** LED and Sound Functions **********
@@ -253,16 +259,15 @@ bool checkIfUserCorrect(){
 	return wasUserCorrect;
 }
 
-void outputGameOver(){
-    //play harsh tones
-
-    if(/*difficulty == 0 && score > easyHighScore*/){
-        /*easyHighScore = score*/
-    }else if(/*difficulty == 1 && score > mediumHighScore*/){
-        /*mediumHighScore = score*/
-    }else if(/*difficulty == 2 && score > hardHighScore*/){
-        /*hardHighScore = score*/
-    }
+void outputGameOver()
+{
+ 	for(i=0;i<=20;i++)
+	{
+		green(timer3, 150);
+		red(timer3, 75);
+		blue(timer3, 125);
+		yellow(timer3, 50);					
+	}
 }
 
 void determineTimerLength(){
@@ -275,3 +280,35 @@ void determineTimerLength(){
     }
 }
 
+void getUserInput()
+{
+	if(digitalRead(6) == 0)
+	{
+		green(timer1, gtone);
+		userInput = 0;
+		cout << userInput << endl;
+		userChoice = true;
+	}
+	if(digitalRead(16) == 0)
+	{
+		red(timer1, rtone);
+		userInput = 1;
+		cout << userInput << endl;
+		userChoice = true;
+	}
+	if(digitalRead(12) == 0)
+	{
+		blue(timer1, btone);
+		userInput = 2;
+		cout << userInput << endl;
+		userChoice = true;
+	}
+	if(digitalRead(13) == 0)
+	{
+		yellow(timer1, ytone);
+		userInput = 3;
+		cout << userInput << endl;
+		userChoice = true;
+	}
+				
+}
