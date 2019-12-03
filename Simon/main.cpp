@@ -18,16 +18,15 @@ vector<int> userSequence;
 vector<int> easyHighSequence; //Need to read/write the *Sequence vectors from external file
 vector<int> mediumHighSequence;
 vector<int> hardHighSequence;
+vector<int> high; //High sequence vector to reduce if loops when calling sequence vectors
+
 
 int main()
 {
 	//**********Variable Declaration*********
 	int easyHighCount,  //Need to read/write the *Count values from external file
 		mediumHighCount,
-		hardHighCount,
-		easyTempCount,
-		mediumTempCount,
-		hardTempCount;
+		hardHighCount;
 	int timer1 = 500,
 		timer2 = 200,
 		timer3 = 25,
@@ -49,6 +48,7 @@ int main()
 			//display current difficulty LED
 			if(difficulty == 0){
 				system("/home/pi/code/LEDs/eon");
+				
 			}
 			if(difficulty == 1){
 				system("/home/pi/code/LEDs/mon");
@@ -68,7 +68,7 @@ int main()
 			}
 			if(digitalRead(24) == 0) //high sequence button
 			{
-
+				if (difficulty == 0)
 			}
 			if(digitalRead(23) == 0) //last button
 			{
