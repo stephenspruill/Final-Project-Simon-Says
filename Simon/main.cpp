@@ -5,6 +5,7 @@
 #include <wiringPi.h>
 #include <stdlib.h>
 #include <softTone.h>
+#include <time.h>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ softToneCreate (25);
 
 //Global Variables
 int difficulty = 0;
+int sequenceNum = 0;
+bool userFail = false;
 
 //Main Vectors to Be Compared
 vector<int> expectedSequence;
@@ -33,7 +36,8 @@ vector<int> high; //High sequence vector to reduce if loops when calling sequenc
 int main()
 {
 	//********** Variable Declaration *********
-	int easyHighCount,  //Need to read/write the *Count values from external file
+	srand(time(0));		//Used to change the random seed during each startup
+	int easyHighCount,  	//Need to read/write the *Count values from external file
 		mediumHighCount,
 		hardHighCount;
 	int timer1 = 500,
@@ -98,38 +102,16 @@ int main()
 		}
 		
 		//********** Gameplay Loop **********
-		while(!gameOver)
+		while(start)
 		{
 			cout << "Generating sequence..." << endl << endl;
-			randNum = rand() % 3;
-			seq.push_back(randNum);
-			delay(500);
+			expectedSequence.push_back(generateRandomNum());
+			delay(timer2);
 			for(int i = 0; i <= sequenceNum; i++)
 			{
 				cout << "Debug: Sequence is: " << seq[i] << endl;
 			}
-			for(int i = 0; i <= sequenceNum; i++)
-			{
-				switch(seq[i])
-				{
-					case 0:
-						green(timer1, gtone);
-						delay(timer2);
-						break;
-					case 1:
-						red(timer1, rtone);
-						delay(timer2);
-						break;
-					case 2:
-						blue(timer1, btone);
-						delay(timer2);
-						break;
-					case 3:
-						yellow(timer1, ytone);
-						delay(timer2);
-						break;
-				}
-			}
+			outputSequence(seq)
 
 			cout << "\nMake your guess!" << endl;
 			cout << "Debug: Displaying user's choice" << endl << endl;
