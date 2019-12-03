@@ -7,7 +7,7 @@ using namespace std;
 //Main Functions
 void startUpSequence();
 int generateRandomNum();
-void outputSequenceTones();
+void outputSequence(vector<int>&);
 bool checkIfUserCorrect();
 void outputGameOver();
 void determineTimerLength();
