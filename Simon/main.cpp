@@ -1,16 +1,30 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
-#include "main.h"
+//#include "main.h"
 #include <wiringPi.h>
 #include <stdlib.h>
 #include <softTone.h>
 #include <time.h>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
-//********** Function Prototypes **********
+//Global Variables
+int difficulty = 0;
+int sequenceNum = 0;
+bool userFail = false;
+int timer1 = 500,
+	timer2 = 200,
+	timer3 = 25,
+	gTone = 659,
+	rTone = 440,
+	bTone = 330,
+	yTone = 554,
+	selTone = 880;
+
+// ********** Function Prototypes **********
 void green(int, int);
 void red(int, int);
 void blue(int, int);
@@ -23,7 +37,7 @@ void startUpSequence();
 int generateRandomNum();
 void outputSequence(vector<int> &);
 void outputGameOver();
-void getUserInput()
+int getUserInput();
 void updateEasyHighSequence();
 void updateMediumHighSequence();
 void updateHardHighSequence();
@@ -33,18 +47,9 @@ void writeMediumHighSequenceToFile();
 void writeHardHighSequenceToFile();
 void readHighSequencesFromFile();
 
-//********** WiringPi input/tone setup **********
-wiringPiSetupGpio ();
-pinMode (6, INPUT);	//Green Button
-pinMode (16, INPUT);	//Red Button
-pinMode (12, INPUT);	//Blue Button
-pinMode (13, INPUT);	//Yellow Button
-softToneCreate (25);
 
-//Global Variables
-int difficulty = 0;
-int sequenceNum = 0;
-bool userFail = false;
+
+
 
 //Main Vectors to Be Compared
 vector<int> expectedSequence;
@@ -66,22 +71,25 @@ string hardHighSequenceFileName = "hardHighSequence.csv";
 
 int main()
 {
-	readHighScoreSequencesFromFile();
+	// ********** WiringPi input/tone setup **********
+	wiringPiSetupGpio ();
+	pinMode (6, INPUT);	//Green Button
+	pinMode (16, INPUT);	//Red Button
+	pinMode (12, INPUT);	//Blue Button
+	pinMode (13, INPUT);	//Yellow Button
+	softToneCreate (25);
+
+	readHighSequencesFromFile();
 	
 	//********** Variable Declaration *********
 	srand(time(0));		//Used to change the random seed during each startup
-	int easyHighCount,  	//Need to read/write the *Count values from external file
+	/*int easyHighCount,  	//Need to read/write the *Count values from external file
 		mediumHighCount,
-		hardHighCount;
-	int timer1 = 500,
-		timer2 = 200,
-		timer3 = 25,
-		gTone = 659,
-		rTone = 440,
-		bTone = 330,
-		yTone = 554,
-		selTone = 880;
+		hardHighCount;*/
+	int userInput;
+
 	bool start = false;
+	bool userChoice = false;
 
 	//********** Startup Sequence **********
 	startUpSequence();
@@ -94,7 +102,7 @@ int main()
 			//display current difficulty LED
 			if(difficulty == 0){
 				system("/home/pi/code/LEDs/eon");
-				timer1 = 1000,
+				timer1 = 1000;
 				timer2 = 400;
 				high = easyHighSequence;
 			}
@@ -152,7 +160,7 @@ int main()
 			{
 				while(!userChoice)
 				{
-					getUserInput();
+					userInput = getUserInput();
 				}
 					userChoice = false;
 					userSequence.push_back(userInput);
@@ -236,10 +244,10 @@ void hardLED(int time, int tone){
 
 //********** Sequence Functions **********
 void startUpSequence(){
-	green(timer1, gtone);
-	red(timer1, rtone);
-	blue(timer1, btone);
-	yellow(timer1, ytone);
+	green(timer1, gTone);
+	red(timer1, rTone);
+	blue(timer1, bTone);
+	yellow(timer1, yTone);
 	easyLED(timer1, selTone);
 	mediumLED(timer1, selTone);
 	hardLED(timer1, selTone);
@@ -248,37 +256,37 @@ void startUpSequence(){
 int generateRandomNum(){
     int randNum = 0;
     randNum = rand() % 3;
-    return randNum
+    return randNum;
 }
 
 //********** Output Sequence *********
 void outputSequence(vector<int> &sequence){
     //will need access to expected sequence
-    for(int i = 0; i < sequence.size(); i++){
+    for(unsigned int i = 0; i <= sequence.size(); i++){
 	switch(sequence[i]){
 		case 0:
-			green(timer1, gtone);
+			green(timer1, gTone);
 			delay(timer2);
 			break;
 		case 1:
-			red(timer1, rtone);
+			red(timer1, rTone);
 			delay(timer2);
 			break;
 		case 2:
-			blue(timer1, btone);
+			blue(timer1, bTone);
 			delay(timer2);
 			break;
 		case 3:
-			yellow(timer1, ytone);
+			yellow(timer1, yTone);
 			delay(timer2);
 			break;
-	}
+		}
     }
 }
 
 void outputGameOver()
 {
- 	for(i=0;i<=20;i++)
+ 	for(int i=0;i<=20;i++)
 	{
 		green(timer3, 150);
 		red(timer3, 75);
@@ -290,14 +298,14 @@ void outputGameOver()
         writeEasyHighSequenceToFile();
     } else if (difficulty == 1 && userSequence.size() > mediumHighSequence.size()) {
         updateMediumHighSequence();
-        writeMediumHighSequencesToFile();
+        writeMediumHighSequenceToFile();
     } else if (difficulty == 2 && userSequence.size() > hardHighSequence.size()) {
         updateHardHighSequence();
-        writeHardHighSequencesToFile();
+        writeHardHighSequenceToFile();
     }
 }
 
-void getUserInput()
+int getUserInput()
 {
 	if(digitalRead(6) == 0)
 	{
@@ -327,6 +335,8 @@ void getUserInput()
 		cout << userInput << endl;
 		userChoice = true;
 	}
+	
+	return userInput;
 				
 }
 
