@@ -37,7 +37,6 @@ void startUpSequence();
 int generateRandomNum();
 void outputSequence(vector<int> &);
 void outputGameOver();
-int getUserInput();
 void updateEasyHighSequence();
 void updateMediumHighSequence();
 void updateHardHighSequence();
@@ -160,8 +159,37 @@ int main()
 			{
 				while(!userChoice)
 				{
-					userInput = getUserInput();
-				}
+					if(digitalRead(6) == 0)
+					{
+						green(timer1, gTone);
+						userInput = 0;
+						cout << userInput << endl;
+						userChoice = true;
+					}
+					if(digitalRead(16) == 0)
+					{
+						red(timer1, rTone);
+						userInput = 1;
+						cout << userInput << endl;
+						userChoice = true;
+					}
+					if(digitalRead(12) == 0)
+					{
+						blue(timer1, bTone);
+						userInput = 2;
+						cout << userInput << endl;
+						userChoice = true;
+					}
+					if(digitalRead(13) == 0)
+					{
+						yellow(timer1, yTone);
+						userInput = 3;
+						cout << userInput << endl;
+						userChoice = true;
+					}
+					
+					return userInput;
+								}
 					userChoice = false;
 					userSequence.push_back(userInput);
 					cout << "\nDebug: Comparing your input of " << userSequence[i]
@@ -305,58 +333,23 @@ void outputGameOver()
     }
 }
 
-int getUserInput()
-{
-	if(digitalRead(6) == 0)
-	{
-		green(timer1, gtone);
-		userInput = 0;
-		cout << userInput << endl;
-		userChoice = true;
-	}
-	if(digitalRead(16) == 0)
-	{
-		red(timer1, rtone);
-		userInput = 1;
-		cout << userInput << endl;
-		userChoice = true;
-	}
-	if(digitalRead(12) == 0)
-	{
-		blue(timer1, btone);
-		userInput = 2;
-		cout << userInput << endl;
-		userChoice = true;
-	}
-	if(digitalRead(13) == 0)
-	{
-		yellow(timer1, ytone);
-		userInput = 3;
-		cout << userInput << endl;
-		userChoice = true;
-	}
-	
-	return userInput;
-				
-}
-
 void updateEasyHighSequence(){
     easyHighSequence.clear();
-    for(int i = 0; i < userSequence.size(); i++){
+    for(int i = 0; i < sequenceNum; i++){
         easyHighSequence.push_back(userSequence[i]);
     }
 }
 
 void updateMediumHighSequence(){
     mediumHighSequence.clear();
-    for(int i = 0; i < userSequence.size(); i++){
+    for(int i = 0; i < sequenceNum; i++){
         mediumHighSequence.push_back(userSequence[i]);
     }
 }
 
 void updateHardHighSequence(){
     hardHighSequence.clear();
-    for(int i = 0; i < userSequence.size(); i++){
+    for(int i = 0; i < sequenceNum; i++){
         hardHighSequence.push_back(userSequence[i]);
     }
 }
@@ -366,7 +359,7 @@ void updateHardHighSequence(){
 void writeEasyHighSequenceToFile() {
     //write out entire easy high sequence
     outFile.open(easyHighSequenceFileName);
-    for (int i = 0; i < easyHighSequence.size(); i++) {
+    for (int i = 0; i < sequenceNum; i++) {
         outFile << easyHighSequence[i] << ",";
     }
     outFile << endl;
@@ -376,8 +369,8 @@ void writeEasyHighSequenceToFile() {
 
 void writeMediumHighSequenceToFile() {
     //write out entire medium high sequence
-    outFile.open(mediumHighSequenceFileName)
-    for (int i = 0; i < mediumHighSequence.size(); i++) {
+    outFile.open(mediumHighSequenceFileName);
+    for (int i = 0; i < sequenceNum; i++) {
         outFile << mediumHighSequence[i] << ",";
     }
     outFile << endl;
@@ -387,8 +380,8 @@ void writeMediumHighSequenceToFile() {
 
 void writeHardHighSequenceToFile(){
     //write out entire hard high sequence
-    outFile.open(hardHighSequenceFileName)
-    for(int i = 0; i < hardHighSequence.size(); i++){
+    outFile.open(hardHighSequenceFileName);
+    for(int i = 0; i < sequenceNum; i++){
         outFile << hardHighSequence[i] << ",";
     }
     outFile << endl;
@@ -401,13 +394,13 @@ void readHighSequencesFromFile(){
     int i;
 
     inFile.open(easyHighSequenceFileName);
-    getLine(inFile, line, '\n');
+    getline(inFile, line, '\n');
     if(line.size() > 0) {
         easyHighSequence.clear();
         i = 0;
         while (line[i] != '\n') {
             if (line[i] != ',') {
-                easyHighSequence[i].push_back(line[i]);
+                easyHighSequence.push_back(line[i]);
                 i++;
             } else {
                 i++;
@@ -418,13 +411,13 @@ void readHighSequencesFromFile(){
     }
 
     inFile.open(mediumHighSequenceFileName);
-    getLine(readMediumHighSequence, line, '\n');
+    getline(inFile, line, '\n');
     if(line.size() > 0) {
         mediumHighSequence.clear();
         i = 0;
         while (line[i] != '\n') {
             if (line[i] != ',') {
-                mediumHighSequence[i].push_back(line[i]);
+                mediumHighSequence.push_back(line[i]);
                 i++;
             } else {
                 i++;
@@ -435,13 +428,13 @@ void readHighSequencesFromFile(){
     }
 
     inFile.open(hardHighSequenceFileName);
-    getLine(readHardHighSequence, line, '\n');
+    getline(inFile, line, '\n');
     if(line.size() > 0) {
         hardHighSequence.clear();
         i = 0;
         while (line[i] != '\n') {
             if (line[i] != ',') {
-                hardHighSequence[i].push_back(line[i]);
+                hardHighSequence.push_back(line[i]);
                 i++;
             } else {
                 i++;
