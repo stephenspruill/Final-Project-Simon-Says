@@ -13,6 +13,7 @@ using namespace std;
 
 //Global Variables
 int difficulty = 0;
+int pauseLoop = 0;
 int sequenceNum = 0;
 bool userFail = false;
 int timer1 = 500,
@@ -32,6 +33,9 @@ void yellow(int, int);
 void easyLED(int, int);
 void mediumLED(int, int);
 void hardLED(int, int);
+void easyLEDoff();
+void mediumLEDoff();
+void hardLEDoff();
 
 void startUpSequence();
 int generateRandomNum();
@@ -72,10 +76,15 @@ int main()
 {
 	// ********** WiringPi input/tone setup **********
 	wiringPiSetupGpio ();
+
 	pinMode (6, INPUT);	//Green Button
 	pinMode (16, INPUT);	//Red Button
 	pinMode (12, INPUT);	//Blue Button
 	pinMode (13, INPUT);	//Yellow Button
+	pinMode (4, INPUT);	//Difficulty Button
+	pinMode (18, INPUT);	//Start Button
+	pinMode (23, INPUT);	//Last Button
+	pinMode (24, INPUT);	//Longest Button
 	softToneCreate (25);
 
 	readHighSequencesFromFile();
@@ -91,6 +100,9 @@ int main()
 	bool userChoice = false;
 
 	//********** Startup Sequence **********
+	system("/home/pi/code/LEDs/eof");
+	system("/home/pi/code/LEDs/mof");
+	system("/home/pi/code/LEDs/hof");
 	startUpSequence();
 	
 	while (1)
@@ -99,33 +111,39 @@ int main()
 		while (start == false)
 		{
 			//display current difficulty LED
-			if(difficulty == 0){
-				system("/home/pi/code/LEDs/eon");
+			if(difficulty == 0 && pauseLoop == 0){
+				easyLED(200, selTone);
 				timer1 = 1000;
 				timer2 = 400;
 				high = easyHighSequence;
+				pauseLoop = 1;
 			}
-			if(difficulty == 1){
-				system("/home/pi/code/LEDs/mon");
+			if(difficulty == 1 && pauseLoop == 0){
+				mediumLED(200, selTone);
 				timer1 = (timer1 * .5);
 				timer2 = (timer2 * .5);
 				high = mediumHighSequence;
+				pauseLoop = 1;
 			}
-			if(difficulty == 2){
-				system("/home/pi/code/LEDs/hon");
+			if(difficulty == 2 && pauseLoop == 0){
+				hardLED(200, selTone);
 				timer1 = (timer1 * .5);
 				timer2 = (timer2 * .5);
 				high = hardHighSequence;
+				pauseLoop = 1;
 			}
 			if(digitalRead(4) == 0) //check difficulty button
 			{
 				system("/home/pi/code/LEDs/eof");
 				system("/home/pi/code/LEDs/mof");
 				system("/home/pi/code/LEDs/hof");
-				if (difficulty <= 2)
+				pauseLoop = 0;
+				if (difficulty < 2){
 					difficulty ++;
-				else
+					delay(200);}
+				else{
 					difficulty = 0;
+					delay(200);}
 			}
 			if(digitalRead(24) == 0) //high sequence button
 			{
@@ -256,19 +274,31 @@ void easyLED(int time, int tone){
 	system("/home/pi/code/LEDs/eon");
 	softToneWrite(25, tone);
 	delay(time);
+	softToneWrite(25, 0);
 }
+
+void easyLEDoff(){
+	system("/home/pi/code/LEDs/eof");}
 
 void mediumLED(int time, int tone){
 	system("/home/pi/code/LEDs/mon");
 	softToneWrite(25, tone);
 	delay(time);
+	softToneWrite(25, 0);
 }
+
+void mediumLEDoff(){
+	system("/home/pi/code/LEDs/mof");}
 
 void hardLED(int time, int tone){
 	system("/home/pi/code/LEDs/hon");
 	softToneWrite(25, tone);
 	delay(time);
+	softToneWrite(25, 0);
 }
+
+void hardLEDoff(){
+	system("/home/pi/code/LEDs/hof");}
 
 //********** Sequence Functions **********
 void startUpSequence(){
@@ -277,8 +307,11 @@ void startUpSequence(){
 	blue(timer1, bTone);
 	yellow(timer1, yTone);
 	easyLED(timer1, selTone);
+	easyLEDoff();
 	mediumLED(timer1, selTone);
+	mediumLEDoff();
 	hardLED(timer1, selTone);
+	hardLEDoff();
 }
 
 int generateRandomNum(){
