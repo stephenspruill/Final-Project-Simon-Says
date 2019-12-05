@@ -172,10 +172,10 @@ int main()
 				start = true;
 			}
 		}
-		if(start)
+		/*if(start)
 		{
 		userHighest.clear();
-		}
+		}*/
 		//********** Gameplay Loop **********
 		while(start)
 		{
@@ -203,6 +203,7 @@ int main()
 						userInput = 0;
 						cout << userInput << endl;
 						userChoice = true;
+						delay(25);
 					}
 					if(digitalRead(16) == 0)
 					{
@@ -210,6 +211,7 @@ int main()
 						userInput = 1;
 						cout << userInput << endl;
 						userChoice = true;
+						delay(25);
 					}
 					if(digitalRead(12) == 0)
 					{
@@ -217,6 +219,7 @@ int main()
 						userInput = 2;
 						cout << userInput << endl;
 						userChoice = true;
+						delay(25);
 					}
 					if(digitalRead(13) == 0)
 					{
@@ -224,6 +227,7 @@ int main()
 						userInput = 3;
 						cout << userInput << endl;
 						userChoice = true;
+						delay(25);
 					}
 				}
 					
@@ -245,12 +249,14 @@ int main()
 					{
 						userFail = true;
 						cout << "Incorrect!" << endl;
+						userSequence.pop_back();
 						sequenceNum++;
 						break;
 					}else
 					{
 						cout << "Correct!" << endl;
 						sequenceNum++;
+						delay(200);
 					}
 				}
 			
@@ -405,7 +411,6 @@ void outputGameOver()
         updateHardHighSequence();
         writeHardHighSequenceToFile();
     }
-    userSequence.clear();
     expectedSequence.clear();
 }
 
