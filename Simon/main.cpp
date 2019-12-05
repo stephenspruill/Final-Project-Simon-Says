@@ -424,56 +424,31 @@ void writeHardHighSequenceToFile(){
 
 void readHighSequencesFromFile(){
     string line;
-    int i;
 
     inFile.open(easyHighSequenceFileName);
-    getline(inFile, line, '\n');
-    if(line.size() > 0) {
-        easyHighSequence.clear();
-        i = 0;
-        while (line[i] != '\n') {
-            if (line[i] != ',') {
-                easyHighSequence.push_back(line[i]);
-                i++;
-            } else {
-                i++;
-            }
+    while(getline(inFile, line, ',')){
+        if(line[0] != '\n') {
+            easyHighSequence.push_back(stoi(line));
         }
-        inFile.close();
-        inFile.clear();
     }
+    inFile.close();
+    inFile.clear();
 
     inFile.open(mediumHighSequenceFileName);
-    getline(inFile, line, '\n');
-    if(line.size() > 0) {
-        mediumHighSequence.clear();
-        i = 0;
-        while (line[i] != '\n') {
-            if (line[i] != ',') {
-                mediumHighSequence.push_back(line[i]);
-                i++;
-            } else {
-                i++;
-            }
+    while(getline(inFile, line, ',')){
+        if(line[0] != '\n') {
+            mediumHighSequence.push_back(stoi(line));
         }
-        inFile.close();
-        inFile.clear();
     }
+    inFile.close();
+    inFile.clear();
 
     inFile.open(hardHighSequenceFileName);
-    getline(inFile, line, '\n');
-    if(line.size() > 0) {
-        hardHighSequence.clear();
-        i = 0;
-        while (line[i] != '\n') {
-            if (line[i] != ',') {
-                hardHighSequence.push_back(line[i]);
-                i++;
-            } else {
-                i++;
-            }
+    while(getline(inFile, line, ',')){
+        if(line[0] != '\n') {
+            hardHighSequence.push_back(stoi(line));
         }
-        inFile.close();
-        inFile.clear();
     }
+    inFile.close();
+    inFile.clear();
 }
