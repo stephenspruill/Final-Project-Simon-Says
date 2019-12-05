@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
-//#include "main.h"
 #include <wiringPi.h>
 #include <stdlib.h>
 #include <softTone.h>
@@ -57,6 +56,7 @@ void readHighSequencesFromFile();
 //Main Vectors to Be Compared
 vector<int> expectedSequence;
 vector<int> userSequence;
+vector<int> userHighest;
 
 //Scoring Vectors
 vector<int> easyHighSequence; //Need to read/write the *Sequence vectors from external file
@@ -87,7 +87,7 @@ int main()
 	pinMode (24, INPUT);	//Longest Button
 	softToneCreate (25);
 
-	readHighSequencesFromFile();
+	
 	
 	//********** Variable Declaration *********
 	srand(time(0));		//Used to change the random seed during each startup
@@ -107,9 +107,16 @@ int main()
 	
 	while (1)
 	{
+		cout << "User highest: " << userHighest.size() << endl;
+				for(unsigned int i = 0; i < userHighest.size(); i++)
+				{
+					cout << "User Highest: " << userHighest[i] << " ";
+				}
+		readHighSequencesFromFile();
 		//********** Mode Select Loop **********
 		while (start == false)
 		{
+			
 			//display current difficulty LED
 			if(difficulty == 0 && pauseLoop == 0){
 				easyLED(200, selTone);
@@ -117,6 +124,7 @@ int main()
 				timer2 = 400;
 				high = easyHighSequence;
 				pauseLoop = 1;
+				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(difficulty == 1 && pauseLoop == 0){
 				mediumLED(200, selTone);
@@ -124,6 +132,7 @@ int main()
 				timer2 = (timer2 * .5);
 				high = mediumHighSequence;
 				pauseLoop = 1;
+				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(difficulty == 2 && pauseLoop == 0){
 				hardLED(200, selTone);
@@ -131,6 +140,7 @@ int main()
 				timer2 = (timer2 * .5);
 				high = hardHighSequence;
 				pauseLoop = 1;
+				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(digitalRead(4) == 0) //check difficulty button
 			{
@@ -147,34 +157,44 @@ int main()
 			}
 			if(digitalRead(24) == 0) //high sequence button
 			{
+				cout << "Displaying highest sequence" << endl;
 				outputSequence(high);
 			}
 			if(digitalRead(23) == 0) //last button
 			{
-				outputSequence(userSequence);
+				cout << "Displaying last played sequence" << endl;
+				delay(200);
+				outputSequence(userHighest);
+				cout << "Exiting last played button" << endl;
 			}
 			if(digitalRead(18) == 0) //start button
 			{
 				start = true;
 			}
 		}
-		
+		if(start)
+		{
+		userHighest.clear();
+		}
 		//********** Gameplay Loop **********
 		while(start)
 		{
 			cout << "Generating sequence..." << endl << endl;
 			expectedSequence.push_back(generateRandomNum());
 			delay(timer2);
-			for(int i = 0; i <= sequenceNum; i++)
+			//for(int i = 0; i <= sequenceNum; i++)
+			for(unsigned int i = 0; i < expectedSequence.size(); i++)
 			{
 				cout << "Debug: Sequence is: " << expectedSequence[i] << endl;
 			}
 			outputSequence(expectedSequence);
-			
+			userSequence.clear();
 			cout << "\nMake your guess!" << endl;
 			cout << "Debug: Displaying user's choice" << endl << endl;
-			for(int i = 0; i <= sequenceNum && !userFail; i++)
+			sequenceNum = 0;
+			for(unsigned int i = 0; i < expectedSequence.size() && !userFail; i++)
 			{
+				cout << "Debug: game loop #: " << i << endl << endl;
 				while(!userChoice)
 				{
 					if(digitalRead(6) == 0)
@@ -205,11 +225,19 @@ int main()
 						cout << userInput << endl;
 						userChoice = true;
 					}
+				}
 					
-					return userInput;
-								}
+					//return userInput;
+			
+					cout << "\nDebug: userSequence size : " << userSequence.size() << endl;
 					userChoice = false;
 					userSequence.push_back(userInput);
+					for(unsigned int j = 0; j < userSequence.size(); j++)
+					{
+						cout <<"\nDebug: userSequence # " << j << " value : " 
+						<< userSequence[j] << endl;
+					}
+					
 					cout << "\nDebug: Comparing your input of " << userSequence[i]
 						 << " with sequence input of " << expectedSequence[i] << endl;
 					delay(timer2);
@@ -217,25 +245,32 @@ int main()
 					{
 						userFail = true;
 						cout << "Incorrect!" << endl;
+						sequenceNum++;
 						break;
 					}else
 					{
 						cout << "Correct!" << endl;
+						sequenceNum++;
 					}
 				}
-			}
+			
 			
 			if(userFail)
 			{
+				cout << "\nDebug: userSequence size : " << userHighest.size() << endl;
 				outputGameOver();
 				cout << "Game Over!" << endl;
 				start = false;
+				userFail = false;
+				sequenceNum = 0;
+				
 			}
-			userSequence.clear();
-			sequenceNum++;
+			userHighest = userSequence;
+
 		}	
-		sequenceNum = 0;
+		
 	}
+}
 
 //********** LED and Sound Functions **********
 void green(int time, int tone){
@@ -302,16 +337,14 @@ void hardLEDoff(){
 
 //********** Sequence Functions **********
 void startUpSequence(){
-	green(timer1, gTone);
+	/*green(timer1, gTone);
 	red(timer1, rTone);
 	blue(timer1, bTone);
 	yellow(timer1, yTone);
-	easyLED(timer1, selTone);
-	easyLEDoff();
-	mediumLED(timer1, selTone);
-	mediumLEDoff();
 	hardLED(timer1, selTone);
 	hardLEDoff();
+	mediumLED(timer1, selTone);
+	mediumLEDoff();*/
 }
 
 int generateRandomNum(){
@@ -323,7 +356,7 @@ int generateRandomNum(){
 //********** Output Sequence *********
 void outputSequence(vector<int> &sequence){
     //will need access to expected sequence
-    for(unsigned int i = 0; i <= sequence.size(); i++){
+    for(unsigned int i = 0; i < sequence.size(); i++){
 	switch(sequence[i]){
 		case 0:
 			green(timer1, gTone);
@@ -354,37 +387,38 @@ void outputGameOver()
 		blue(timer3, 125);
 		yellow(timer3, 50);					
 	}
-    if(difficulty == 0 && userSequence.size() > easyHighSequence.size()) {
+	cout << "Current difficulty: " << difficulty << endl;
+	cout << "Current size of largest easy sequence: " << easyHighSequence.size() << endl;
+	cout << "Current size of largest medium sequence: " << mediumHighSequence.size() << endl;
+	cout << "Current size of largest hard sequence: " << hardHighSequence.size() << endl;
+	cout << "Current size of user sequence: " << userHighest.size() << endl;
+    if(difficulty == 0 && userHighest.size() > easyHighSequence.size()) {
+	cout << "Updating easy high sequence" << endl;
         updateEasyHighSequence();
         writeEasyHighSequenceToFile();
-    } else if (difficulty == 1 && userSequence.size() > mediumHighSequence.size()) {
+    } else if (difficulty == 1 && userHighest.size() > mediumHighSequence.size()) {
+	cout << "Updating medium high sequence" << endl;
         updateMediumHighSequence();
         writeMediumHighSequenceToFile();
-    } else if (difficulty == 2 && userSequence.size() > hardHighSequence.size()) {
+    } else if (difficulty == 2 && userHighest.size() > hardHighSequence.size()) {
+	cout << "Updating hard high sequence" << endl;
         updateHardHighSequence();
         writeHardHighSequenceToFile();
     }
+    userSequence.clear();
+    expectedSequence.clear();
 }
 
 void updateEasyHighSequence(){
-    easyHighSequence.clear();
-    for(int i = 0; i < sequenceNum; i++){
-        easyHighSequence.push_back(userSequence[i]);
-    }
+    easyHighSequence = userHighest;
 }
 
 void updateMediumHighSequence(){
-    mediumHighSequence.clear();
-    for(int i = 0; i < sequenceNum; i++){
-        mediumHighSequence.push_back(userSequence[i]);
-    }
+    mediumHighSequence = userHighest;
 }
 
 void updateHardHighSequence(){
-    hardHighSequence.clear();
-    for(int i = 0; i < sequenceNum; i++){
-        hardHighSequence.push_back(userSequence[i]);
-    }
+    hardHighSequence = userHighest;
 }
 
 //********** Read/Write File **********
@@ -392,7 +426,7 @@ void updateHardHighSequence(){
 void writeEasyHighSequenceToFile() {
     //write out entire easy high sequence
     outFile.open(easyHighSequenceFileName);
-    for (int i = 0; i < sequenceNum; i++) {
+    for (unsigned int i = 0; i < userHighest.size(); i++) {
         outFile << easyHighSequence[i] << ",";
     }
     outFile << endl;
@@ -403,7 +437,7 @@ void writeEasyHighSequenceToFile() {
 void writeMediumHighSequenceToFile() {
     //write out entire medium high sequence
     outFile.open(mediumHighSequenceFileName);
-    for (int i = 0; i < sequenceNum; i++) {
+    for (unsigned int i = 0; i < userHighest.size(); i++) {
         outFile << mediumHighSequence[i] << ",";
     }
     outFile << endl;
@@ -414,7 +448,7 @@ void writeMediumHighSequenceToFile() {
 void writeHardHighSequenceToFile(){
     //write out entire hard high sequence
     outFile.open(hardHighSequenceFileName);
-    for(int i = 0; i < sequenceNum; i++){
+    for(unsigned int i = 0; i < userHighest.size(); i++){
         outFile << hardHighSequence[i] << ",";
     }
     outFile << endl;
@@ -424,7 +458,9 @@ void writeHardHighSequenceToFile(){
 
 void readHighSequencesFromFile(){
     string line;
-
+	easyHighSequence.clear();
+	mediumHighSequence.clear();
+	hardHighSequence.clear();
     inFile.open(easyHighSequenceFileName);
     while(getline(inFile, line, ',')){
         if(line[0] != '\n') {
@@ -452,3 +488,4 @@ void readHighSequencesFromFile(){
     inFile.close();
     inFile.clear();
 }
+
