@@ -121,7 +121,6 @@ int main()
 				timer2 = 150;
 				high = easyHighSequence;
 				pauseLoop = 1;
-				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(difficulty == 1 && pauseLoop == 0){
 				mediumLED(200, selTone);
@@ -129,7 +128,6 @@ int main()
 				timer2 = 100;
 				high = mediumHighSequence;
 				pauseLoop = 1;
-				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(difficulty == 2 && pauseLoop == 0){
 				hardLED(200, selTone);
@@ -137,7 +135,6 @@ int main()
 				timer2 = 50;
 				high = hardHighSequence;
 				pauseLoop = 1;
-				cout << "Debug: Mode Select Loop" << endl << endl;
 			}
 			if(digitalRead(4) == 0) //check difficulty button
 			{
@@ -154,7 +151,6 @@ int main()
 			}
 			if(digitalRead(24) == 0) //high sequence button
 			{
-				cout << "Displaying highest sequence of " << high.size() << endl;
 				outputSequence(high);
 			}
 			if(digitalRead(23) == 0) //last button
@@ -171,32 +167,24 @@ int main()
 						outputSequence(hardHighest);
 						break;
 				}
-				cout << "Displaying last played sequence" << endl;
 				delay(200);
-				cout << "Exiting last played button" << endl;
 			}
 			if(digitalRead(18) == 0) //start button
 			{
 				start = true;
 			}
 		}
-		/*if(start)
-		{
-		userHighest.clear();
-		}*/
+		
 		//********** Gameplay Loop **********
 		while(start)
 		{
 			    if(difficulty == 0 && userHighest.size() > easyHighSequence.size()) {
-				cout << "Updating easy high sequence" << endl;
 				updateEasyHighSequence();
 				writeEasyHighSequenceToFile();
 			    } else if (difficulty == 1 && userHighest.size() > mediumHighSequence.size()) {
-				cout << "Updating medium high sequence" << endl;
 				updateMediumHighSequence();
 				writeMediumHighSequenceToFile();
 			    } else if (difficulty == 2 && userHighest.size() > hardHighSequence.size()) {
-				cout << "Updating hard high sequence" << endl;
 				updateHardHighSequence();
 				writeHardHighSequenceToFile();
 			    }
@@ -212,29 +200,19 @@ int main()
 						hardHighest = userSequence;
 						break;
 				}
-			cout << "Generating sequence..." << endl << endl;
 			expectedSequence.push_back(generateRandomNum());
 			delay(timer2);
-			//for(int i = 0; i <= sequenceNum; i++)
-			for(unsigned int i = 0; i < expectedSequence.size(); i++)
-			{
-				cout << "Debug: Sequence is: " << expectedSequence[i] << endl;
-			}
 			outputSequence(expectedSequence);
 			userSequence.clear();
-			cout << "\nMake your guess!" << endl;
-			cout << "Debug: Displaying user's choice" << endl << endl;
 			sequenceNum = 0;
 			for(unsigned int i = 0; i < expectedSequence.size() && !userFail; i++)
 			{
-				cout << "Debug: game loop #: " << i << endl << endl;
 				while(!userChoice)
 				{
 					if(digitalRead(6) == 0)
 					{
 						green(timer1, gTone);
 						userInput = 0;
-						cout << userInput << endl;
 						userChoice = true;
 						delay(25);
 					}
@@ -242,7 +220,6 @@ int main()
 					{
 						red(timer1, rTone);
 						userInput = 1;
-						cout << userInput << endl;
 						userChoice = true;
 						delay(25);
 					}
@@ -250,7 +227,6 @@ int main()
 					{
 						blue(timer1, bTone);
 						userInput = 2;
-						cout << userInput << endl;
 						userChoice = true;
 						delay(25);
 					}
@@ -258,36 +234,22 @@ int main()
 					{
 						yellow(timer1, yTone);
 						userInput = 3;
-						cout << userInput << endl;
 						userChoice = true;
 						delay(25);
 					}
 				}
 					
-					//return userInput;
-			
-					cout << "\nDebug: userSequence size : " << userSequence.size() << endl;
 					userChoice = false;
 					userSequence.push_back(userInput);
-					for(unsigned int j = 0; j < userSequence.size(); j++)
-					{
-						cout <<"\nDebug: userSequence # " << j << " value : " 
-						<< userSequence[j] << endl;
-					}
-					
-					cout << "\nDebug: Comparing your input of " << userSequence[i]
-						 << " with sequence input of " << expectedSequence[i] << endl;
 					delay(timer2);
 					if(userSequence[i] != expectedSequence[i])
 					{
 						userFail = true;
-						cout << "Incorrect!" << endl;
 						userSequence.pop_back();
 						sequenceNum++;
 						break;
 					}else
 					{
-						cout << "Correct!" << endl;
 						sequenceNum++;
 						delay(200);
 					}
@@ -296,9 +258,7 @@ int main()
 			
 			if(userFail)
 			{
-				cout << "\nDebug: userSequence size : " << userHighest.size() << endl;
 				outputGameOver();
-				cout << "Game Over!" << endl;
 				start = false;
 				userFail = false;
 				sequenceNum = 0;
@@ -377,14 +337,14 @@ void hardLEDoff(){
 
 //********** Sequence Functions **********
 void startUpSequence(){
-	/*green(timer1, gTone);
+	green(timer1, gTone);
 	red(timer1, rTone);
 	blue(timer1, bTone);
 	yellow(timer1, yTone);
 	hardLED(timer1, selTone);
 	hardLEDoff();
 	mediumLED(timer1, selTone);
-	mediumLEDoff();*/
+	mediumLEDoff();
 }
 
 int generateRandomNum(){
@@ -420,18 +380,13 @@ void outputSequence(vector<int> &sequence){
 
 void outputGameOver()
 {
- 	for(int i=0;i<=5;i++)
+ 	for(int i=0;i<=20;i++)
 	{
 		green(timer3, 150);
 		red(timer3, 75);
 		blue(timer3, 125);
 		yellow(timer3, 50);					
 	}
-	cout << "Current difficulty: " << difficulty << endl;
-	cout << "Current size of largest easy sequence: " << easyHighSequence.size() << endl;
-	cout << "Current size of largest medium sequence: " << mediumHighSequence.size() << endl;
-	cout << "Current size of largest hard sequence: " << hardHighSequence.size() << endl;
-	cout << "Current size of user sequence: " << userHighest.size() << endl;
 
     expectedSequence.clear();
 }
